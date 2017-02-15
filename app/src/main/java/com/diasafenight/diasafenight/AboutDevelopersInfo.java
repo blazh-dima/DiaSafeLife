@@ -16,6 +16,7 @@ public class AboutDevelopersInfo extends AppCompatActivity {
         IconBar iconBar = new IconBar(this);
         iconBar.registerIconBar();
 
+
         devInfo = (TextView) findViewById(R.id.devInfo);
         devInfo.setText("-Version 0.06b\n\n-Developers:\n" +
                 "\tDmytro Blazhevsky\nVlad Petrus\n\n\n\n\n\n" +

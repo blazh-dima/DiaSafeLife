@@ -4,19 +4,15 @@ import com.diasafenight.diasafenight.Model.MeasurementInput;
 
 import java.util.Comparator;
 
-/**
- * Created by SL on 08.01.2017.
- */
-
 public class MeasurementInputComparator implements Comparator<MeasurementInput> {
     @Override
     public int compare(MeasurementInput measurementInput, MeasurementInput t1) {
         if(measurementInput.InputOn.isBefore(t1.InputOn)){
-            return 1;
+            return -1;
         }
         else if(measurementInput.InputOn.isAfter(t1.InputOn))
         {
-            return -1;
+            return 1;
         }
         else
             return 0;
