@@ -13,6 +13,7 @@ public class MeasurementInputComparator implements Comparator<MeasurementInput> 
         else if(measurementInput.InputOn.isAfter(t1.InputOn))
         {
             return 1;
+
         }
         else
             return 0;

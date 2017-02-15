@@ -40,6 +40,7 @@ public class InjectionEdit extends AppCompatActivity implements View.OnClickList
     EditText editInsuline;
     public final static DateTimeFormatter DateFormat = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm");
     DbContext context;
+
     Injection model = null;
     ArrayAdapter<InjectionType> injectAdapter;
 
@@ -49,6 +50,7 @@ public class InjectionEdit extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_injection_edit);
 
         context = new DbContext(this);
+        int a;
 
         injectionType = (Spinner)findViewById(R.id.editInjectionTypee);
         injectAdapter  = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, context.getInjectionTypeAll());
