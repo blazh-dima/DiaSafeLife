@@ -18,12 +18,6 @@ public class AboutDevelopersInfo extends AppCompatActivity {
 
 
         devInfo = (TextView) findViewById(R.id.devInfo);
-        devInfo.setText("-Version 0.06b\n\n-Developers:\n" +
-                "\tDmytro Blazhevsky\nVlad Petrus\n\n\n\n\n\n" +
-                "\tThe prediction algorithm is based on scientifically " +
-                "substantiated results obtained within EU projects \n\nDIAdvisor \n" +
-                "cordis.europa.eu/project/rcn/85459_en.html\n" +
-                "and " +
-                "cordis.europa.eu/project/rcn/194356_en.html.");
+        devInfo.setText(getResources().getString(R.string.about_developers));
     }
 }

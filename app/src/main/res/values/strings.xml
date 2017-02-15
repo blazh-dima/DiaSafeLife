@@ -112,5 +112,14 @@
         The prediction for NH will appear after you input 4 basic measurements taken according to the recommendations of your doctor (in the morning – before breakfast, in the
         midday – before lunch, in the evening – before diner, and before going to bed).
     </string>
+    <string name="about_developers">
+        "-Version 0.06b\n\n-Developers:\n" +
+                "\tDmytro Blazhevsky\nVlad Petrus\n\n\n\n\n\n" +
+                "\tThe prediction algorithm is based on scientifically " +
+                "substantiated results obtained within EU projects \n\nDIAdvisor \n" +
+                "cordis.europa.eu/project/rcn/85459_en.html\n" +
+                "and " +
+                "cordis.europa.eu/project/rcn/194356_en.html."
+    </string>
 
 </resources>
