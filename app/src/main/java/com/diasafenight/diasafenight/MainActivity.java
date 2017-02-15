@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private boolean ShowDecimals = false;
     private String riskPopupMessage;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
