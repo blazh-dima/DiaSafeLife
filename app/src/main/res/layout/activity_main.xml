@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:id="@+id/activity_main"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="#FFFDF5E5"
+
+    tools:context="com.diasafenight.diasafenight.MainActivity">
+
+
+
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="0%"
+            android:gravity="center"
+            android:textColor="#FFF6A6B2"
+            android:layout_marginTop="150dp"
+            android:textSize="70sp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/percantageTextView"/>
+
+        <TextView
+            android:textColor="@android:color/background_light"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView5"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="115dp"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:text="MEDIUM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:id="@+id/riskTxt"
+            android:layout_below="@+id/percantageTextView"
+            android:layout_centerHorizontal="true"
+            android:textSize="24sp"
+            android:textColor="#FFF6A6B2"
+            android:textStyle="normal" />
+
+
+    <ListView
+        android:id="@+id/mainInputList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="5dp"
+        android:layout_alignBottom="@+id/textView5"
+        android:layout_below="@+id/todayTxt"
+        android:layout_alignRight="@+id/percantageTextView"
+        android:layout_alignEnd="@+id/percantageTextView" />
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:background="#000000"
+
+        android:paddingRight="14dp"
+        android:paddingTop="5dp"
+        android:layout_height="36dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <Button
+
+            android:background="@android:color/transparent"
+            android:id="@+id/devInfoBtn"
+            android:text=""
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:drawableRight="@drawable/info_blue"
+            android:drawableEnd="@drawable/info_blue"
+            android:gravity="center"
+            android:layout_weight="0.28" />
+
+        <Button
+            android:text=""
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@android:color/transparent"
+            android:id="@+id/glucoseListBtn"
+            android:drawableRight="@drawable/input_list_icon"
+            android:drawableEnd="@drawable/input_list_icon"
+            android:gravity="center"
+            android:layout_weight="1" />
+
+        <Button
+            android:text=""
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@android:color/transparent"
+            android:id="@+id/graphBtn"
+            android:drawableRight="@drawable/icon_chart_blue"
+            android:drawableEnd="@drawable/icon_chart_blue"
+            android:gravity="center"
+            android:layout_weight="1" />
+
+        <Button
+            android:text=""
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@android:color/transparent"
+            android:id="@+id/homeBtn"
+            android:drawableRight="@drawable/home_icon"
+            android:drawableEnd="@drawable/home_icon"
+            android:gravity="center"
+            android:layout_weight="1"  />
+
+        <Button
+            android:text=""
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@android:color/transparent"
+            android:id="@+id/insulineBtn"
+            android:drawableRight="@drawable/medical_kit"
+            android:drawableEnd="@drawable/medical_kit"
+            android:gravity="center"
+            android:layout_weight="1"  />
+
+
+    </LinearLayout>
+
+    <TextView
+        android:text="Today"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/todayTxt"
+        android:textColor="#000000"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:text=""
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:drawableRight="@drawable/infobuttn"
+        android:drawableEnd="@drawable/infobuttn"
+        android:id="@+id/algIngobtn"
+        android:layout_below="@+id/todayTxt"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="12dp"
+        android:layout_marginEnd="12dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewInforesult"
+
+        android:textAlignment="center"
+        android:gravity="center"
+        android:textColor="@color/colorAccent"
+        android:textSize="12sp"
+        android:padding="15dp"
+
+        android:layout_below="@+id/riskTxt"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:text="Enter data"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:id="@+id/enterDataBtn"
+        android:background="@drawable/button_style"
+        android:textSize="18sp"
+        android:onClick="onClick"
+        android:layout_below="@+id/textViewInforesult"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

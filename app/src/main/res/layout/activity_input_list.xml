@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#FFFDF5E5"
+    tools:context="com.diasafenight.diasafenight.GlucoseList"
+    android:orientation="vertical">
+    <Button
+        android:id="@+id/inputListBtn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Choose date"
+        android:layout_margin="20dp"
+        android:background="@drawable/button_style"
+        android:textColor="#000000"
+        android:fontFamily="sans-serif"
+        android:textSize="18sp">
+    </Button>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:background="#000000"
+
+        android:paddingRight="14dp"
+        android:paddingTop="5dp"
+
+
+        android:layout_height="36dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <Button
+
+            android:background="@android:color/transparent"
+            android:id="@+id/devInfoBtn"
+            android:text=""
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:drawableRight="@drawable/info_blue"
+            android:drawableEnd="@drawable/info_blue"
+            android:gravity="center"
+            android:layout_weight="0.28" />
+
+        <Button
+            android:text=""
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@android:color/transparent"
+            android:id="@+id/glucoseListBtn"
+            android:drawableRight="@drawable/input_list_icon"
+            android:drawableEnd="@drawable/input_list_icon"
+            android:gravity="center"
+            android:layout_weight="1" />
+
+        <Button
+            android:text=""
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@android:color/transparent"
+            android:id="@+id/graphBtn"
+            android:drawableRight="@drawable/icon_chart_blue"
+            android:drawableEnd="@drawable/icon_chart_blue"
+            android:gravity="center"
+            android:layout_weight="1" />
+
+        <Button
+            android:text=""
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@android:color/transparent"
+            android:id="@+id/homeBtn"
+            android:drawableRight="@drawable/home_icon"
+            android:drawableEnd="@drawable/home_icon"
+            android:gravity="center"
+            android:layout_weight="1"  />
+
+        <Button
+            android:text=""
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@android:color/transparent"
+            android:id="@+id/insulineBtn"
+            android:drawableRight="@drawable/medical_kit"
+            android:drawableEnd="@drawable/medical_kit"
+            android:gravity="center"
+            android:layout_weight="1"  />
+
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/lvMain"
+        android:layout_width="match_parent"
+        android:layout_height="385dp"
+        android:layout_weight="0.58"
+        android:layout_below="@+id/inputListBtn"
+        android:layout_alignLeft="@+id/inputListBtn"
+        android:layout_alignStart="@+id/inputListBtn"
+        android:layout_marginTop="12dp"
+        android:layout_alignRight="@+id/inputListBtn"
+        android:layout_alignEnd="@+id/inputListBtn">
+    </ListView>
+
+
+</RelativeLayout>

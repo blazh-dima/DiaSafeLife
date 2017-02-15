@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp">
+    <TextView
+        android:text="Edit or delete injection type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/injTTextViewe"
+        android:textSize="22dp"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="17dp"
+        android:textColor="#000000" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editInjectionType"
+        android:layout_below="@+id/injTTextViewe"
+        android:layout_marginTop="13dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_below="@+id/editInjectionType">
+        <TextView
+            android:id="@+id/injTypeEditBtn"
+
+            android:layout_height="64dp"
+            android:textColor="@android:color/background_light"
+            android:text=""
+            android:drawableRight="@drawable/checked1"
+            android:drawableEnd="@drawable/checked1"
+            android:layout_width="wrap_content"
+
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/injTypeDeleteBtn"
+            android:layout_height="64dp"
+            android:textColor="@android:color/background_light"
+            android:text=""
+            android:drawableRight="@drawable/delete"
+            android:drawableEnd="@drawable/delete"
+            android:layout_weight="1"
+            android:layout_width="wrap_content">
+
+        </TextView>
+    </LinearLayout>
+
+
+</RelativeLayout>

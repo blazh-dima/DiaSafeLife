@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="low_risk">22</integer>
+    <integer name="moderate_risk">45</integer>
+    <integer name="high_risk">69</integer>
+    <integer name="extreme_risk">100</integer>
+</resources>

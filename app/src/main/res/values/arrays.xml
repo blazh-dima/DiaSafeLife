@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--MeasurementPeriod-->
+<!--Before Breaskfast - Morning-->
+<!--Before Lunch - Midday-->
+<!--Before Dinner - Evening-->
+<!--Before Bed - Before Bed-->
+<resources>
+
+    <string-array name="languages">
+        <item>English</item>
+    </string-array>
+
+    <string-array name="timeFormats">
+        <item>24 hour</item>
+        <item>12 hour</item>
+    </string-array>
+
+    <string-array name="genders">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+</resources>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_primary_data"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#FFFDF5E5"
+    tools:context="com.diasafenight.diasafenight.PrimaryData">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="6dip"
+        android:id="@+id/plinearLayout">
+        <TextView
+            android:text="Language"
+            android:textSize="20dp"
+            android:layout_width="103dp"
+            android:layout_height="50dp"
+            android:gravity="center" />
+        <Spinner
+            android:layout_height="50dp"
+            android:textSize="20pt"
+            android:id="@+id/editLanguage"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="50dp"
+            style="@style/SpinnerTheme"
+
+            android:spinnerMode="dropdown" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="6dip"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView4"
+            android:layout_weight="0.29" />
+
+        <TextView
+            android:id="@+id/OkPrimary0Input"
+            android:gravity="center"
+            android:onClick="onClick"
+            android:layout_width="64dp"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:drawableRight="@drawable/checked1"
+            android:drawableEnd="@drawable/checked1"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView11"
+            android:layout_weight="0.29" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:weightSum="1"
+        android:id="@+id/plinearLayout2"
+        android:layout_below="@+id/plinearLayout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:text="Time format"
+            android:textSize="20dp"
+            android:layout_width="103dp"
+            android:gravity="center"
+            android:layout_height="match_parent" />
+
+        <Spinner
+            android:layout_height="50dp"
+            android:textSize="20pt"
+            android:id="@+id/editDTFormat"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="50dp"
+            style="@style/SpinnerTheme"
+
+            android:spinnerMode="dropdown" />
+    </LinearLayout>
+
+    <LinearLayout
+
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1"
+        android:id="@+id/plinearLayout3"
+        android:layout_below="@+id/plinearLayout2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="52dp">
+
+        <TextView
+            android:text="Units"
+            android:textSize="20dp"
+
+            android:gravity="center"
+            android:layout_height="match_parent"
+            android:layout_width="103dp"/>
+
+        <Spinner
+            android:layout_height="50dp"
+            android:textSize="20pt"
+            android:id="@+id/munit"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="50dp"
+            style="@style/SpinnerTheme"
+
+            android:spinnerMode="dropdown" />
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_primary_data"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#FFFDF5E5"
+    tools:context="com.diasafenight.diasafenight.PrimaryData">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="6dip"
+        android:id="@+id/linearLayout">
+        <TextView
+            android:text="Gender"
+            android:textSize="20dp"
+            android:layout_width="103dp"
+            android:layout_height="50dp"
+            android:gravity="center" />
+        <Spinner
+            android:layout_height="50dp"
+            android:textSize="20pt"
+            android:id="@+id/editGender"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="50dp"
+            style="@style/SpinnerTheme"
+
+            android:spinnerMode="dropdown" />
+    </LinearLayout>
+
+    <LinearLayout
+
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="19dp"
+        android:weightSum="1"
+        android:layout_below="@+id/linearLayout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/linearLayout2">
+
+        <TextView
+            android:text="Year of birth"
+            android:textSize="20dp"
+            android:layout_width="103dp"
+            android:gravity="center"
+            android:layout_height="match_parent" />
+
+        <Spinner
+            android:layout_height="50dp"
+            android:textSize="20pt"
+            android:id="@+id/birthyear"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="50dp"
+            style="@style/SpinnerTheme"
+            android:spinnerMode="dropdown" />
+    </LinearLayout>
+
+    <LinearLayout
+
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="19dp"
+        android:weightSum="1"
+        android:layout_below="@+id/linearLayout2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/linearLayout3">
+
+        <TextView
+            android:text="Ill from"
+            android:textSize="20dp"
+            android:layout_width="103dp"
+            android:gravity="center"
+            android:layout_height="match_parent" />
+
+        <Spinner
+            android:layout_height="50dp"
+            android:textSize="20pt"
+            android:id="@+id/illfrom"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="50dp"
+            style="@style/SpinnerTheme"
+            android:spinnerMode="dropdown" />
+    </LinearLayout>
+    <LinearLayout
+
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="19dp"
+        android:weightSum="1"
+        android:layout_below="@+id/linearLayout3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/linearLayout4">
+
+        <TextView
+            android:text="A1C, %"
+            android:textSize="20dp"
+            android:layout_width="103dp"
+            android:gravity="center"
+            android:layout_height="match_parent" />
+
+        <EditText
+            android:layout_height="50dp"
+            android:textSize="20dp"
+            android:inputType="number"
+            android:id="@+id/editA1C"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="50dp"
+            android:textColor="#000000"
+            />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="6dip"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:layout_width="42dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView7" />
+
+        <TextView
+            android:id="@+id/backGlucoseInput"
+            android:onClick="onClick"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:textColor="@android:color/background_light"
+            android:text=""
+
+            android:drawableRight="@drawable/cancelbuttonsmall"
+            android:drawableEnd="@drawable/cancelbuttonsmall"
+            android:gravity="center">
+
+        </TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView6"
+            android:layout_weight="0.84" />
+
+        <TextView
+            android:id="@+id/OkPrimaryInput"
+            android:gravity="center"
+            android:onClick="onClick"
+            android:layout_width="64dp"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:drawableRight="@drawable/checked1"
+            android:drawableEnd="@drawable/checked1"
+            />
+
+        <TextView
+            android:layout_width="43dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView8" />
+
+    </LinearLayout>
+
+</RelativeLayout>

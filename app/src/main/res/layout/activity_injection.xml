@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_injection"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.diasafenight.diasafenight.InjectionList">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="6dip"
+        android:id="@+id/glinearLayouti">
+        <TextView
+            android:text="Injection"
+            android:textColor="#000000"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="26sp"
+            android:id="@+id/textViewi"
+            android:gravity="center_horizontal"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/glinearLayouti"
+        android:id="@+id/InjectionBtnBar"
+        android:layout_marginTop="5dp"
+        >
+
+        <Button
+            android:id="@+id/addInjectionBtn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Add injection"
+            android:background="@drawable/button_style"
+            android:textColor="#000000"
+            android:fontFamily="sans-serif"
+            android:textSize="18sp"
+            android:layout_weight="1"
+            android:layout_margin="10dp"/>
+
+        <Button
+            android:id="@+id/injectionTypeBtn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Injection type"
+            android:background="@drawable/button_style"
+            android:textColor="#000000"
+            android:fontFamily="sans-serif"
+            android:textSize="18sp"
+            android:layout_weight="1"
+            android:layout_margin="10dp"/>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:background="#000000"
+
+        android:paddingRight="14dp"
+        android:paddingTop="5dp"
+
+
+        android:layout_height="36dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <Button
+
+            android:background="@android:color/transparent"
+            android:id="@+id/devInfoBtn"
+            android:text=""
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:drawableRight="@drawable/info_blue"
+            android:drawableEnd="@drawable/info_blue"
+            android:gravity="center"
+            android:layout_weight="0.28" />
+
+        <Button
+            android:text=""
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@android:color/transparent"
+            android:id="@+id/glucoseListBtn"
+            android:drawableRight="@drawable/input_list_icon"
+            android:drawableEnd="@drawable/input_list_icon"
+            android:gravity="center"
+            android:layout_weight="1" />
+
+        <Button
+            android:text=""
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@android:color/transparent"
+            android:id="@+id/graphBtn"
+            android:drawableRight="@drawable/icon_chart_blue"
+            android:drawableEnd="@drawable/icon_chart_blue"
+            android:gravity="center"
+            android:layout_weight="1" />
+
+        <Button
+            android:text=""
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@android:color/transparent"
+            android:id="@+id/homeBtn"
+            android:drawableRight="@drawable/home_icon"
+            android:drawableEnd="@drawable/home_icon"
+            android:gravity="center"
+            android:layout_weight="1"  />
+
+        <Button
+            android:text=""
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@android:color/transparent"
+            android:id="@+id/insulineBtn"
+            android:drawableRight="@drawable/medical_kit"
+            android:drawableEnd="@drawable/medical_kit"
+            android:gravity="center"
+            android:layout_weight="1"  />
+
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/injectionListView"
+        android:layout_width="match_parent"
+        android:layout_height="385dp"
+
+        android:padding="15dp"
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/InjectionBtnBar"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+    </ListView>
+
+</RelativeLayout>

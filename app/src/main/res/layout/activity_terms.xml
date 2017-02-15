@@ -1,0 +1,113 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/info_root"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:layout_gravity="bottom"
+ >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:background="#FFFDF5E5"
+        android:layout_height="wrap_content"
+       >
+
+        <TextView
+
+            android:id="@+id/infos_titre"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dip"
+            android:textSize="20dip"
+            android:background="#FFFDF5E5"
+            android:gravity="center">
+
+        </TextView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFDF5E5"
+        android:layout_weight="1">
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/infos_LL"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/infos_text"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16dip"
+                    android:padding="4dip"
+                    android:lineSpacingMultiplier="1.1"
+                    android:autoLink="web"
+                    android:text="@string/large_text"
+                    android:textColor="@color/colorAccent">
+                </TextView>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFDF5E5"
+        android:paddingTop="6dip">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView9"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:id="@+id/declineTerms"
+            android:onClick="onClick"
+            android:textColor="#000000"
+            android:text=""
+            android:drawableRight="@drawable/cancelbuttonsmall"
+            android:drawableEnd="@drawable/cancelbuttonsmall"
+            android:gravity="center">
+
+        </TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView3"
+            android:layout_weight="2.58" />
+
+        <TextView
+            android:id="@+id/acceptTerms"
+
+
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:onClick="onClick"
+            android:textColor="#000000"
+            android:text=""
+            android:drawableRight="@drawable/checked1"
+            android:drawableEnd="@drawable/checked1"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView10"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+    </LinearLayout>
