@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import android.graphics.Color;
 
+import com.diasafenight.diasafenight.Helpers.Comparators.MeasurementInputComparator;
 import com.diasafenight.diasafenight.Model.DbContext;
 import com.diasafenight.diasafenight.Model.MeasurementInput;
 import com.github.mikephil.charting.charts.LineChart;
@@ -23,6 +24,7 @@ import org.joda.time.LocalDate;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.*;
 
 public class Statistic_prob extends AppCompatActivity {
     LineChart lineChart;
@@ -53,6 +55,7 @@ public class Statistic_prob extends AppCompatActivity {
 
         DbContext conn = new DbContext(this);
         ArrayList<MeasurementInput> preds = getWeekData();
+        Collections.sort(preds, new MeasurementInputComparator());
 
         lineChart = (LineChart) findViewById(R.id.probChart);
 
@@ -119,6 +122,7 @@ public class Statistic_prob extends AppCompatActivity {
         ///INPUT DATA
         ArrayList<Entry> entrs_inp = new ArrayList<>();
         ArrayList<MeasurementInput> datapDay = conn.getMeasurementInputByDay(LocalDate.now());
+        Collections.sort(datapDay, new MeasurementInputComparator());
 
         inputChart = (LineChart) findViewById(R.id.inputChart);
         DateTime bac_d = DateTime.now();
