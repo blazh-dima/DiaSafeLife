@@ -100,6 +100,7 @@ public class InjectionEdit extends AppCompatActivity implements View.OnClickList
         if (view.getId() == R.id.deleteInjectionBtn) {
             context.deleteInjection(model);
             Toast.makeText(this,"Deleted", Toast.LENGTH_LONG).show();
+            finish();
         }
 
         if (view.getId() == R.id.updateInjectionBtn) {

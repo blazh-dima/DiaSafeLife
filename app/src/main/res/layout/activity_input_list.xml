@@ -60,22 +60,21 @@
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:background="@android:color/transparent"
-            android:id="@+id/graphBtn"
-            android:drawableRight="@drawable/icon_chart_blue"
-            android:drawableEnd="@drawable/icon_chart_blue"
-            android:gravity="center"
-            android:layout_weight="1" />
-
-        <Button
-            android:text=""
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:background="@android:color/transparent"
             android:id="@+id/homeBtn"
             android:drawableRight="@drawable/home_icon"
             android:drawableEnd="@drawable/home_icon"
             android:gravity="center"
             android:layout_weight="1"  />
+        <Button
+            android:text=""
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@android:color/transparent"
+            android:id="@+id/graphBtn"
+            android:drawableRight="@drawable/icon_chart_blue"
+            android:drawableEnd="@drawable/icon_chart_blue"
+            android:gravity="center"
+            android:layout_weight="1" />
 
         <Button
             android:text=""
