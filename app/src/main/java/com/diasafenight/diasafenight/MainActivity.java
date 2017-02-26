@@ -135,14 +135,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     public void showPrediction()
     {
-        ArrayList<Prediction> predictions = dbase.getPredictionByDay(LocalDate.now());
-        Collections.sort(predictions, new PredicitionComparator());
-
-        if(predictions.size() > 0
-                && Utils.IsDayDataCompleted(LocalDate.now(), dbase)) { //Shit
+        Prediction p = dbase.getFirstPredictionByDay(LocalDate.now());
+        if(p != null) {
             percText.setBackgroundResource(0);
-            int res = predictions.get(0).Value;
-
+            int res = p.Value;
             if(res <= getResources().getInteger(R.integer.low_risk)) {
                 riskTxt.setText(getResources().getString(R.string.low_risk));
                 riskPopupMessage = getResources().getString(R.string.low_risk_message);

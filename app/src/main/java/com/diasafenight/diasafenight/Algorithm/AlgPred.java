@@ -1,6 +1,7 @@
 package com.diasafenight.diasafenight.Algorithm;
 
 import com.diasafenight.diasafenight.Model.MeasurementInput;
+import com.diasafenight.diasafenight.Model.MeasurementType;
 
 import java.util.*;
 
@@ -8,11 +9,11 @@ import java.util.*;
  * Created by Home on 02.01.2017.
  */
 public class AlgPred {
-    public int  getProbGipoglik(ArrayList<MeasurementInput> args, String type) {
+    public int  getProbGipoglik(ArrayList<MeasurementInput> args, MeasurementType type) {
         List<Integer> vars_Measurments =  new ArrayList<Integer>();
         PredictionAlg predict = new PredictionAlg();
         int convert_coef = 1;
-        if(type.equals("mmol/l"))
+        if(type.Id == 2) //mmol/l
             convert_coef = 18;
 
         for(int i = 0;i<args.size();i++){

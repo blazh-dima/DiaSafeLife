@@ -1,6 +1,7 @@
 package com.diasafenight.diasafenight.Model;
 
 import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 
 import java.util.Calendar;
 
@@ -14,14 +15,17 @@ public class Prediction {
 
     public Prediction() { }
 
-    public Prediction(DateTime createdOn, int value)
+    public Prediction(LocalDate createdOn, int value)
     {
         this.CreatedOn = createdOn;
         this.Value = value;
     }
 
-
     public int Id;
-    public DateTime CreatedOn;
+
+    // TODO: 26.02.2017
+    // Change in database. Now datetime
+    public LocalDate CreatedOn;
+
     public int Value;
 }

@@ -37,8 +37,9 @@ import java.util.Scanner;
 
 public class DbContext extends SQLiteOpenHelper {
 
-    public final static DateTimeFormatter DateFormat = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm");
-    public final static DateTimeFormatter TimeFormat = DateTimeFormat.forPattern("HH:mm");
+    private final static DateTimeFormatter DateTFormat = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm");
+    private final static DateTimeFormatter TimeFormat = DateTimeFormat.forPattern("HH:mm");
+    private final static DateTimeFormatter DateFormat = DateTimeFormat.forPattern("yyyy-MM-dd");
 
     //database name
     final private static String DbName = "DiaSafeNight.db";
@@ -351,13 +352,11 @@ public class DbContext extends SQLiteOpenHelper {
         try {
 
             Cursor c = db.rawQuery("select * from Prediction", null);
-
             while(c.moveToNext())
             {
                 Prediction m = new Prediction();
-                m.CreatedOn = DateTime.now();
                 m.Id = c.getInt(c.getColumnIndexOrThrow("Id"));
-                m.CreatedOn = DateFormat.parseDateTime(c.getString(c.getColumnIndexOrThrow("CreatedOn")));
+                m.CreatedOn = DateFormat.parseLocalDate(c.getString(c.getColumnIndexOrThrow("CreatedOn")));
                 m.Value = c.getInt(c.getColumnIndexOrThrow("Value"));
                 list.add(m);
             }
@@ -370,30 +369,20 @@ public class DbContext extends SQLiteOpenHelper {
         this.close();
         return list;
     }
-    public ArrayList<Prediction> getPredictionByDay(LocalDate day)
+    public Prediction getFirstPredictionByDay(LocalDate day)
     {
-        ArrayList <Prediction> list = new ArrayList <Prediction>();
-        DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy-MM-dd");
-
+        Prediction p = null;
         this.open();
         try {
 
-            String sql =
-                    "select * from Prediction " +
-                            "where CreatedOn like '" +
-                            day.toString(fmt)+ "%"+
-                            "'";
-
-            Cursor c = db.rawQuery(sql, null);
-
-            while(c.moveToNext())
+            Cursor c = db.query(true, Prediction.TableName, Prediction.TableColumns, "CreatedOn" + "='" + DateFormat.print(day)+"'",
+                    null, null, null, null, null);
+            if(c.moveToFirst())
             {
-                Prediction m = new Prediction();
-                m.CreatedOn = DateTime.now();
-                m.Id = c.getInt(c.getColumnIndexOrThrow("Id"));
-                m.CreatedOn = DateFormat.parseDateTime(c.getString(c.getColumnIndexOrThrow("CreatedOn")));
-                m.Value = c.getInt(c.getColumnIndexOrThrow("Value"));
-                list.add(m);
+                p = new Prediction();
+                p.Id = c.getInt(c.getColumnIndexOrThrow("Id"));
+                p.CreatedOn = DateFormat.parseLocalDate(c.getString(c.getColumnIndexOrThrow("CreatedOn")));
+                p.Value = c.getInt(c.getColumnIndexOrThrow("Value"));
             }
             c.close();
         }
@@ -402,9 +391,31 @@ public class DbContext extends SQLiteOpenHelper {
             Log.e("DbError", e.getMessage());
         }
         this.close();
-        return list;
+        return p;
     }
 
+    public void updatePrediction(Prediction i)
+    {
+        this.open();
+        try {
+
+            ContentValues cv = new ContentValues();
+            cv.put("CreatedOn", DateFormat.print(i.CreatedOn));
+            cv.put("Value", i.Value);
+            db.update(Prediction.TableName, cv, "Id" + "=" + String.valueOf(i.Id), null);
+        }
+        catch (Exception e)
+        {
+            Log.e("DbError", e.getMessage());
+        }
+        this.close();
+    }
+    public void deletePrediction(Prediction i)
+    {
+        this.open();
+        db.delete(Prediction.TableName, "Id = " + i.Id, null);
+        this.close();
+    }
 
     //MeasurementPeriod
     public ArrayList<MeasurementPeriod> getMeasurementPeriodAll()
@@ -471,7 +482,7 @@ public class DbContext extends SQLiteOpenHelper {
         try {
 
             ContentValues cv = new ContentValues();
-            cv.put("InputOn", DateFormat.print(i.InputOn));
+            cv.put("InputOn", DateTFormat.print(i.InputOn));
             cv.put("Value", i.Value);
             if(i.Tag != null)
                 cv.put("TagId", i.Tag.Id);
@@ -491,7 +502,7 @@ public class DbContext extends SQLiteOpenHelper {
         try {
 
             ContentValues cv = new ContentValues();
-            cv.put("InputOn", DateFormat.print(i.InputOn));
+            cv.put("InputOn", DateTFormat.print(i.InputOn));
             cv.put("Value", i.Value);
             cv.put("TagId", i.Tag.Id);
             cv.put("SleepComfortLevel", i.SleepComfortLevel);
@@ -514,15 +525,16 @@ public class DbContext extends SQLiteOpenHelper {
 
             Cursor c = db.query(true, MeasurementInput.TableName, MeasurementInput.TableColumns, "Id" + "=" + String.valueOf(id),
                     null, null, null, null, null);
-            c.moveToFirst();
-
-            m.Id = c.getInt(c.getColumnIndexOrThrow("Id"));
-            m.InputOn = DateFormat.parseDateTime(c.getString(c.getColumnIndexOrThrow("InputOn")));
-            m.Value = c.getDouble(c.getColumnIndexOrThrow("Value"));
-            int mid = c.getInt(c.getColumnIndexOrThrow("TagId"));
-            m.Tag = this.getTagById(mid);
-            m.SleepComfortLevel = c.getInt(c.getColumnIndexOrThrow("SleepComfortLevel"));
-            m.IsPreventStepsTaken = c.getInt(c.getColumnIndexOrThrow("IsPreventStepsTaken")) != 0;
+            if(c.moveToFirst())
+            {
+                m.Id = c.getInt(c.getColumnIndexOrThrow("Id"));
+                m.InputOn = DateTFormat.parseDateTime(c.getString(c.getColumnIndexOrThrow("InputOn")));
+                m.Value = c.getDouble(c.getColumnIndexOrThrow("Value"));
+                int mid = c.getInt(c.getColumnIndexOrThrow("TagId"));
+                m.Tag = this.getTagById(mid);
+                m.SleepComfortLevel = c.getInt(c.getColumnIndexOrThrow("SleepComfortLevel"));
+                m.IsPreventStepsTaken = c.getInt(c.getColumnIndexOrThrow("IsPreventStepsTaken")) != 0;
+            };
 
             c.close();
         }
@@ -553,7 +565,7 @@ public class DbContext extends SQLiteOpenHelper {
                 MeasurementInput m = new MeasurementInput();
                 m.InputOn = DateTime.now();
                 m.Id = c.getInt(c.getColumnIndexOrThrow("Id"));
-                m.InputOn = DateFormat.parseDateTime(c.getString(c.getColumnIndexOrThrow("InputOn")));
+                m.InputOn = DateTFormat.parseDateTime(c.getString(c.getColumnIndexOrThrow("InputOn")));
                 m.Value = c.getDouble(c.getColumnIndexOrThrow("Value"));
                 int mid = c.getInt(c.getColumnIndexOrThrow("TagId"));
                 m.Tag = this.getTagById(mid);
@@ -585,7 +597,7 @@ public class DbContext extends SQLiteOpenHelper {
         try {
 
             ContentValues cv = new ContentValues();
-            cv.put("InputOn", DateFormat.print(i.InputOn));
+            cv.put("InputOn", DateTFormat.print(i.InputOn));
             cv.put("Value", i.Value);
             if(i.InjectionType != null)
                 cv.put("InjectionTypeId", i.InjectionType.Id);
@@ -605,7 +617,7 @@ public class DbContext extends SQLiteOpenHelper {
         try {
 
             ContentValues cv = new ContentValues();
-            cv.put("InputOn", DateFormat.print(i.InputOn));
+            cv.put("InputOn", DateTFormat.print(i.InputOn));
             cv.put("Value", i.Value);
             if(i.InjectionType !=null)
                 cv.put("InjectionTypeId", i.InjectionType.Id);
@@ -627,13 +639,16 @@ public class DbContext extends SQLiteOpenHelper {
 
             Cursor c = db.query(true, Injection.TableName, Injection.TableColumns, "Id" + "=" + String.valueOf(id),
                     null, null, null, null, null);
-            c.moveToFirst();
+            if(c.moveToFirst())
+            {
+                m.Id = c.getInt(c.getColumnIndexOrThrow("Id"));
+                m.InputOn = DateTFormat.parseDateTime(c.getString(c.getColumnIndexOrThrow("InputOn")));
+                m.Value = c.getDouble(c.getColumnIndexOrThrow("Value"));
+                int mid = c.getInt(c.getColumnIndexOrThrow("InjectionTypeId"));
+                m.InjectionType = this.getInjectionTypeById(mid);
+            };
 
-            m.Id = c.getInt(c.getColumnIndexOrThrow("Id"));
-            m.InputOn = DateFormat.parseDateTime(c.getString(c.getColumnIndexOrThrow("InputOn")));
-            m.Value = c.getDouble(c.getColumnIndexOrThrow("Value"));
-            int mid = c.getInt(c.getColumnIndexOrThrow("InjectionTypeId"));
-            m.InjectionType = this.getInjectionTypeById(mid);
+
 
             c.close();
         }
@@ -663,7 +678,7 @@ public class DbContext extends SQLiteOpenHelper {
             {
                 Injection m = new Injection();
                 m.Id = c.getInt(c.getColumnIndexOrThrow("Id"));
-                m.InputOn = DateFormat.parseDateTime(c.getString(c.getColumnIndexOrThrow("InputOn")));
+                m.InputOn = DateTFormat.parseDateTime(c.getString(c.getColumnIndexOrThrow("InputOn")));
                 m.Value = c.getDouble(c.getColumnIndexOrThrow("Value"));
                 int mid = c.getInt(c.getColumnIndexOrThrow("InjectionTypeId"));
                 m.InjectionType = this.getInjectionTypeById(mid);
@@ -691,7 +706,7 @@ public class DbContext extends SQLiteOpenHelper {
             {
                 Injection m = new Injection();
                 m.Id = c.getInt(c.getColumnIndexOrThrow("Id"));
-                m.InputOn = DateFormat.parseDateTime(c.getString(c.getColumnIndexOrThrow("InputOn")));
+                m.InputOn = DateTFormat.parseDateTime(c.getString(c.getColumnIndexOrThrow("InputOn")));
                 m.Value = c.getDouble(c.getColumnIndexOrThrow("Value"));
                 int mid = c.getInt(c.getColumnIndexOrThrow("InjectionTypeId"));
                 m.InjectionType = this.getInjectionTypeById(mid);

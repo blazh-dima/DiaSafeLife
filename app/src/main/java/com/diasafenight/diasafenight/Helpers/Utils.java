@@ -117,16 +117,9 @@ public  class Utils {
 
     }
 
-    public static Boolean IsLastPredictionDangerous(LocalDate date, DbContext context, int low, int top)
-    {
-        ArrayList<Prediction> list = context.getPredictionByDay(date);
-        if(list.size() > 0)
-        {
-            Collections.sort(list, new PredicitionComparator());
-            return list.get(0).Value >= low && list.get(0).Value <= top;
-        }
-
-        return false;
+    public static Boolean IsLastPredictionDangerous(LocalDate date, DbContext context, int low, int top) {
+        Prediction p = context.getFirstPredictionByDay(date);
+        return p != null && p.Value >= low && p.Value <= top;
 
     }
 
@@ -136,16 +129,30 @@ public  class Utils {
             i.ShowDecimal = false;
 
     }
-    public static int MakePrediction(LocalDate date, DbContext context, MeasurementType type)
+    public static void RefreshPrediction(LocalDate date, DbContext context, MeasurementType type)
     {
-
-        if(IsDayDataCompleted(date, context))
+        Prediction p = context.getFirstPredictionByDay(date);
+        boolean dayDataCompleted = IsDayDataCompleted(date, context);
+        if(dayDataCompleted)
         {
-            ArrayList<MeasurementInput> tmp = context.getMeasurementInputByDay(date);
+            ArrayList<MeasurementInput> args = context.getMeasurementInputByDay(date);
             AlgPred algor = new AlgPred();
-            return algor.getProbGipoglik(tmp, type.Name);
+            int pred = algor.getProbGipoglik(args, type);
+            if(p == null)
+            {
+                p = new Prediction(date, pred);
+                context.addPrediction(p);
+            }
+            else
+            {
+                p.Value = pred;
+                context.updatePrediction(p);
+            }
         }
-        return -1;
+        else if(p != null){
+            context.deletePrediction(p);
+        }
+
     }
 
 }

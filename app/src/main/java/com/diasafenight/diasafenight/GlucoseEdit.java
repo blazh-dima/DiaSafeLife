@@ -47,7 +47,7 @@ public class GlucoseEdit extends AppCompatActivity implements View.OnClickListen
     DbContext context;
     Validator validator;
 
-    MeasurementInput model = null;
+    MeasurementInput modelOld, modelNew = null;
     MeasurementType type;
     public TextView GlUnits;
 
@@ -82,11 +82,11 @@ public class GlucoseEdit extends AppCompatActivity implements View.OnClickListen
 
         if(this.getIntent().hasExtra("MeasurementInput"))
         {
-            model = (MeasurementInput)this.getIntent().getSerializableExtra("MeasurementInput");
-            tag.setSelection(model.Tag.Id - 1 );
-            editTime.setText(DateTimeFormat.forPattern("HH:mm").print(model.InputOn));
-            editDate.setText(DateTimeFormat.forPattern("yyyy-MM-dd").print(model.InputOn));
-            this.setValue(editGlucose, model.Value);
+            modelOld = (MeasurementInput)this.getIntent().getSerializableExtra("MeasurementInput");
+            tag.setSelection(modelOld.Tag.Id - 1 );
+            editTime.setText(DateTimeFormat.forPattern("HH:mm").print(modelOld.InputOn));
+            editDate.setText(DateTimeFormat.forPattern("yyyy-MM-dd").print(modelOld.InputOn));
+            this.setValue(editGlucose, modelOld.Value);
         }
 
         GlUnits.setText("("+type.Name+")");
@@ -113,34 +113,26 @@ public class GlucoseEdit extends AppCompatActivity implements View.OnClickListen
 
         }
         if (view.getId() == R.id.deleteBtn) {
-            context.deleteMeasurementInput(model);
-
-            int prediction = Utils.MakePrediction(LocalDate.now(), context, type);
-            if(prediction > -1)
-            {
-                Prediction p = new Prediction(DateTime.now(), prediction);
-                context.addPrediction(p);
-            }
-            Toast.makeText(this,"Deleted", Toast.LENGTH_LONG).show();
-            setResult(RESULT_OK, new Intent());
+            context.deleteMeasurementInput(modelOld);
+            Utils.RefreshPrediction(modelOld.InputOn.toLocalDate(), context, type);
             finish();
         }
 
         if (view.getId() == R.id.updateGlucoseInput) {
+            modelNew = new MeasurementInput(modelOld);
 
-            model.InputOn = DateFormat.parseDateTime(editDate.getText().toString() + " "+ editTime.getText().toString());
-            model.Value = Double.valueOf(editGlucose.getText().toString());
-            model.Tag = (Tag)tag.getSelectedItem();
+            modelNew.InputOn = DateFormat.parseDateTime(editDate.getText().toString() + " "+ editTime.getText().toString());
+            modelNew.Value = Double.valueOf(editGlucose.getText().toString());
+            modelNew.Tag = (Tag)tag.getSelectedItem();
 
-            if(validator.ValidateMeasurementInput(model, type))
+            if(validator.ValidateMeasurementInput(modelNew, type))
             {
-                context.updateMeasurementInput(model);
-                int prediction = Utils.MakePrediction(LocalDate.now(), context, type);
-                if(prediction > -1)
-                {
-                    Prediction p = new Prediction(DateTime.now(), prediction);
-                    context.addPrediction(p);
-                }
+                context.updateMeasurementInput(modelNew);
+                Utils.RefreshPrediction(modelNew.InputOn.toLocalDate(),context, type);
+
+                if(!modelNew.InputOn.toLocalDate().equals(modelOld.InputOn.toLocalDate()))
+                    Utils.RefreshPrediction(modelOld.InputOn.toLocalDate(),context, type);
+
                 finish();
             }
 

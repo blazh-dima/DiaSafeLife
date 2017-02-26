@@ -15,7 +15,16 @@ public class MeasurementInput implements Serializable {
     public final static String TableName = "MeasurementInput";
     public final static String[] TableColumns = new String[] {"Id", "InputOn", "Value", "SleepComfortLevel", "IsPreventStepsTaken", "TagId"};
 
-    public MeasurementInput() {;
+    public MeasurementInput() {}
+
+    public MeasurementInput(MeasurementInput m) {
+        this.Id = m.Id;
+        this.InputOn = m.InputOn;
+        this.Value = m.Value;
+        this.SleepComfortLevel = m.SleepComfortLevel;
+        this.IsPreventStepsTaken = m.IsPreventStepsTaken;
+        this.Tag = m.Tag;
+        this.ShowDecimal = m.ShowDecimal;
     }
 
     public MeasurementInput(DateTime inputOn, double value, int sleepComfortLevel, boolean isPreventStepsTaken, Tag tag)

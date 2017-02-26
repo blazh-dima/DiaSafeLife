@@ -209,7 +209,6 @@ public class GlucoseInput extends AppCompatActivity implements View.OnClickListe
         }
 
         if (view.getId() == R.id.saveGlucoseInput) {
-
             MeasurementInput i = new MeasurementInput();
             i.InputOn = DateFormat.parseDateTime(editDate.getText().toString() + " "+ editTime.getText().toString());
             i.Value = Double.valueOf(editGlucose.getText().toString());
@@ -218,20 +217,12 @@ public class GlucoseInput extends AppCompatActivity implements View.OnClickListe
                 i.SleepComfortLevel = SleepComfortLevel;
             if(IsPreventStepsTaken != -1)
                 i.IsPreventStepsTaken = IsPreventStepsTaken == 1;
-
             if(validator.ValidateMeasurementInput(i, type))
             {
                 context.addMeasurementInput(i);
-                int prediction = Utils.MakePrediction(LocalDate.now(), context, type);
-                if(prediction > -1)
-                {
-                    Prediction p = new Prediction(DateTime.now(), prediction);
-                    context.addPrediction(p);
-                }
+                Utils.RefreshPrediction(i.InputOn.toLocalDate(),context, type);
                 finish();
             }
-
-
         }
     }
 
