@@ -93,7 +93,8 @@ public class PredictionAlg {
             sum+=this.get_R(x_measurements.get(i));
         }
         //res/= Mi;//div by n of measur. in end for for greater accuracy
-        return (sum*10)/Mi;
+        double res = (sum*10)/Mi;
+        return res;
     }
 
     public int get_predictor7(List<Integer> x_measurements) {

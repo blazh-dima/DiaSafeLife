@@ -35,7 +35,6 @@ public class AlgPred {
     }
 
     public static int getProbability(List<Integer> vars_x) {
-        System.out.println("www");
         PredictionAlg p = new PredictionAlg();
         List<List<Integer>> predictorsMatr = p.ReadStaticDb();
         int[][] arrPred = new int[predictorsMatr.size()][predictorsMatr.get(0).size()];
@@ -242,10 +241,10 @@ public class AlgPred {
                 vect_C[7]* current_predict.get(7);
 
         double val_Pag_2 = vect_d[0]* current_predict.get(0)+
-                vect_d[1]* current_predict.get(1)+
-                vect_d[2]* current_predict.get(2)+
-                vect_d[3]* current_predict.get(3)+
-                vect_d[4]* current_predict.get(4);
+                vect_d[1]* current_predict.get(6)+
+                vect_d[2]* current_predict.get(7)+
+                vect_d[3]* current_predict.get(8)+
+                vect_d[4]* current_predict.get(9);
 
         Collections.sort(uniq_ag1_list);
         Collections.sort(uniq_ag2_list);
@@ -287,9 +286,9 @@ public class AlgPred {
             }
         }
         int [][] matr_result = {{12,18,31,34},
-                {16,25,49,57},
-                {30,39,64,73},
-                {36,47,77,91}};
+                                {16,25,49,57},
+                                {30,39,64,73},
+                                {36,47,77,91}};
 
         Random rn = new Random();
         int pseudo_random = rn.nextInt(7) -3;
