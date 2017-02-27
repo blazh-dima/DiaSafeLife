@@ -549,14 +549,12 @@ public class DbContext extends SQLiteOpenHelper {
     {
         ArrayList <MeasurementInput> list = new ArrayList <MeasurementInput>();
 
-        DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy-MM-dd");
-
         this.open();
         try {
             String sql =
                     "select * from MeasurementInput " +
-                            "where InputOn like '" +
-                            day.toString(fmt)+ "%"+
+                            "where strftime('%Y-%m-%d', InputOn) = '" +
+                            DateFormat.print(day) +
                             "'";
 
             Cursor c = db.rawQuery(sql, null );
@@ -662,15 +660,12 @@ public class DbContext extends SQLiteOpenHelper {
     public ArrayList<Injection> getInjectionByDay(LocalDate day)
     {
         ArrayList <Injection> list = new ArrayList <Injection>();
-
-        DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy-MM-dd");
-
         this.open();
         try {
             String sql =
                     "select * from Injection " +
-                            "where InputOn like '" +
-                            day.toString(fmt)+ "%"+
+                            "where strftime('%Y-%m-%d', InputOn) =  '" +
+                            DateFormat.print(day) +
                             "'";
 
             Cursor c = db.rawQuery(sql, null );
