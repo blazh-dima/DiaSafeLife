@@ -14,6 +14,7 @@ import com.diasafenight.diasafenight.Helpers.DatePickerFragment;
 import com.diasafenight.diasafenight.Helpers.IconBar;
 import com.diasafenight.diasafenight.Helpers.Comparators.MeasurementInputComparator;
 import com.diasafenight.diasafenight.Helpers.Utils;
+import com.diasafenight.diasafenight.Interfaces.IDatePickeReceiver;
 import com.diasafenight.diasafenight.Model.DbContext;
 import com.diasafenight.diasafenight.Model.MeasurementInput;
 import com.diasafenight.diasafenight.Model.User;
@@ -25,7 +26,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 
-public class GlucoseList extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
+public class GlucoseList
+        extends AppCompatActivity
+        implements View.OnClickListener, AdapterView.OnItemClickListener, IDatePickeReceiver {
     DbContext context = null;
     ListView lvMain;
     public LocalDate viewDate;
@@ -53,7 +56,7 @@ public class GlucoseList extends AppCompatActivity implements View.OnClickListen
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.inputListBtn) {
-            DialogFragment newFragment = new DatePickerFragment(this, dateChoose);
+            DialogFragment newFragment = new DatePickerFragment(this);
             newFragment.show(this.getFragmentManager(), "datePicker");
         }
     }
@@ -86,5 +89,12 @@ public class GlucoseList extends AppCompatActivity implements View.OnClickListen
     protected void onStart() {
         super.onStart();
         this.setList();
+    }
+
+    @Override
+    public void OnDatePicked(LocalDate date) {
+        viewDate = date;
+        this.setList();
+        dateChoose.setText(DbContext.DateFormat.print(date));
     }
 }

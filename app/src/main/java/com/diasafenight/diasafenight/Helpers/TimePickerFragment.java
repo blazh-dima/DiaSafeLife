@@ -9,6 +9,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TimePicker;
 
+import com.diasafenight.diasafenight.Interfaces.IDatePickeReceiver;
+import com.diasafenight.diasafenight.Interfaces.ITimePickerReceiver;
+
+import org.joda.time.LocalTime;
+
 import java.util.Calendar;
 
 /**
@@ -17,11 +22,14 @@ import java.util.Calendar;
 
 public class TimePickerFragment extends DialogFragment
         implements TimePickerDialog.OnTimeSetListener {
-    EditText timeBtn;
+    ITimePickerReceiver receiver;
 
-    public TimePickerFragment(EditText b)
+    public TimePickerFragment() {
+    }
+
+    public TimePickerFragment(ITimePickerReceiver r)
     {
-        timeBtn = b;
+        receiver = r;
     }
 
     @Override
@@ -36,7 +44,7 @@ public class TimePickerFragment extends DialogFragment
     }
 
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        timeBtn.setText(String.format("%02d", hourOfDay)+":"+String.format("%02d", minute));
-
+        LocalTime t = new LocalTime(hourOfDay, minute);
+        receiver.OnTimePicked(t);
     }
 }

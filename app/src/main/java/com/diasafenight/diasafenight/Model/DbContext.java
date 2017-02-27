@@ -37,9 +37,9 @@ import java.util.Scanner;
 
 public class DbContext extends SQLiteOpenHelper {
 
-    private final static DateTimeFormatter DateTFormat = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm");
-    private final static DateTimeFormatter TimeFormat = DateTimeFormat.forPattern("HH:mm");
-    private final static DateTimeFormatter DateFormat = DateTimeFormat.forPattern("yyyy-MM-dd");
+    public final static DateTimeFormatter DateTFormat = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm");
+    public final static DateTimeFormatter TimeFormat = DateTimeFormat.forPattern("HH:mm");
+    public final static DateTimeFormatter DateFormat = DateTimeFormat.forPattern("yyyy-MM-dd");
 
     //database name
     final private static String DbName = "DiaSafeNight.db";

@@ -27,12 +27,14 @@ public class MeasurementPeriodAdapter extends ArrayAdapter<MeasurementPeriod> {
     private LayoutInflater mInflater;
     private DbContext context;
     private boolean ShowDecimals;
+    private LocalDate ViewDate;
 
-    public MeasurementPeriodAdapter(ArrayList<MeasurementPeriod> list, boolean ShowDecimals, AppCompatActivity activity) {
+    public MeasurementPeriodAdapter(ArrayList<MeasurementPeriod> list, boolean ShowDecimals, LocalDate ViewDate, AppCompatActivity activity) {
         super(activity.getApplicationContext(), R.layout.input_list_main_activity_item,  list);
         mInflater = LayoutInflater.from(activity.getApplicationContext());
         context = new DbContext(activity.getApplicationContext());
         this.ShowDecimals = ShowDecimals;
+        this.ViewDate = ViewDate;
     }
 
     @NonNull
@@ -53,7 +55,7 @@ public class MeasurementPeriodAdapter extends ArrayAdapter<MeasurementPeriod> {
             holder = (MeasurementPeriodAdapter.ViewHolder)row.getTag();
 
         MeasurementPeriod period = getItem(position);
-        MeasurementInput m = Utils.getValidMinMeasurementInput(LocalDate.now(), period, context);
+        MeasurementInput m = Utils.getValidMinMeasurementInput(ViewDate, period, context);
         if(m != null)
         {
             m.ShowDecimal = ShowDecimals;

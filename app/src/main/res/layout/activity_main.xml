@@ -50,7 +50,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="5dp"
         android:layout_alignBottom="@+id/textView5"
-        android:layout_below="@+id/todayTxt"
+        android:layout_below="@+id/viewDateTxt"
         android:layout_alignRight="@+id/percantageTextView"
         android:layout_alignEnd="@+id/percantageTextView" />
 
@@ -129,7 +129,7 @@
         android:text="Today"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/todayTxt"
+        android:id="@+id/viewDateTxt"
         android:textColor="#000000"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
@@ -145,7 +145,7 @@
         android:drawableRight="@drawable/infobuttn"
         android:drawableEnd="@drawable/infobuttn"
         android:id="@+id/algIngobtn"
-        android:layout_below="@+id/todayTxt"
+        android:layout_below="@+id/viewDateTxt"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_marginRight="12dp"
@@ -179,5 +179,17 @@
         android:onClick="onClick"
         android:layout_below="@+id/textViewInforesult"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text=""
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:drawableRight="@drawable/calendar_icon24"
+        android:drawableEnd="@drawable/calendar_icon24"
+        android:id="@+id/calendarBtn"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/algIngobtn"
+        android:layout_alignLeft="@+id/algIngobtn"
+        android:layout_alignStart="@+id/algIngobtn" />
 
 </RelativeLayout>

@@ -4,36 +4,28 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.RatingBar;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.diasafenight.diasafenight.Helpers.DatePickerFragment;
+import com.diasafenight.diasafenight.Interfaces.IDatePickeReceiver;
 import com.diasafenight.diasafenight.Helpers.IconBar;
 import com.diasafenight.diasafenight.Helpers.TimePickerFragment;
 import com.diasafenight.diasafenight.Helpers.Utils;
 import com.diasafenight.diasafenight.Helpers.Validator;
+import com.diasafenight.diasafenight.Interfaces.ITimePickerReceiver;
 import com.diasafenight.diasafenight.Model.DbContext;
 import com.diasafenight.diasafenight.Model.MeasurementInput;
 import com.diasafenight.diasafenight.Model.MeasurementPeriod;
 import com.diasafenight.diasafenight.Model.MeasurementType;
-import com.diasafenight.diasafenight.Model.Prediction;
 import com.diasafenight.diasafenight.Model.Tag;
 import com.diasafenight.diasafenight.Model.User;
 
@@ -44,14 +36,7 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-
-import java.util.Date;
-import java.util.regex.Pattern;
-
-
-public class GlucoseInput extends AppCompatActivity implements View.OnClickListener {
+public class GlucoseInput extends AppCompatActivity implements View.OnClickListener, IDatePickeReceiver, ITimePickerReceiver {
     public Button timeChoose;
     public Button dateChoose;
     public TextView savebtn;
@@ -60,7 +45,6 @@ public class GlucoseInput extends AppCompatActivity implements View.OnClickListe
     public EditText editDate;
     Spinner tag;
     EditText editGlucose;
-    public final static DateTimeFormatter DateFormat = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm");
     DbContext context;
     Validator validator;
     public TextView GlUnits;
@@ -194,12 +178,11 @@ public class GlucoseInput extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.dateChooseBtn) {
-            DialogFragment newFragment = new DatePickerFragment(editDate);
+            DialogFragment newFragment = new DatePickerFragment(this);
             newFragment.show(this.getFragmentManager(), "datePicker");
-
         }
         if (view.getId() == R.id.timeChooseBtn) {
-            DialogFragment newFragment = new TimePickerFragment(editTime);
+            DialogFragment newFragment = new TimePickerFragment(this);
             newFragment.show(this.getFragmentManager(), "timePicker");
 
         }
@@ -210,7 +193,7 @@ public class GlucoseInput extends AppCompatActivity implements View.OnClickListe
 
         if (view.getId() == R.id.saveGlucoseInput) {
             MeasurementInput i = new MeasurementInput();
-            i.InputOn = DateFormat.parseDateTime(editDate.getText().toString() + " "+ editTime.getText().toString());
+            i.InputOn = DbContext.DateTFormat.parseDateTime(editDate.getText().toString() + " " + editTime.getText().toString());
             i.Value = Double.valueOf(editGlucose.getText().toString());
             i.Tag = (Tag)tag.getSelectedItem();
             if(IsMorning)
@@ -226,5 +209,14 @@ public class GlucoseInput extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    @Override
+    public void OnDatePicked(LocalDate date) {
+        editDate.setText(DbContext.DateFormat.print(date));
+    }
+
+    @Override
+    public void OnTimePicked(LocalTime time) {
+        editTime.setText(DbContext.TimeFormat.print(time));
+    }
 }
 

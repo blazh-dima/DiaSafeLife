@@ -17,6 +17,8 @@ import com.diasafenight.diasafenight.Helpers.DatePickerFragment;
 import com.diasafenight.diasafenight.Helpers.TimePickerFragment;
 import com.diasafenight.diasafenight.Helpers.Utils;
 import com.diasafenight.diasafenight.Helpers.Validator;
+import com.diasafenight.diasafenight.Interfaces.IDatePickeReceiver;
+import com.diasafenight.diasafenight.Interfaces.ITimePickerReceiver;
 import com.diasafenight.diasafenight.Model.DbContext;
 import com.diasafenight.diasafenight.Model.MeasurementInput;
 import com.diasafenight.diasafenight.Model.MeasurementType;
@@ -26,12 +28,13 @@ import com.diasafenight.diasafenight.Model.User;
 
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 import java.util.ArrayList;
 
-public class GlucoseEdit extends AppCompatActivity implements View.OnClickListener {
+public class GlucoseEdit extends AppCompatActivity implements View.OnClickListener, ITimePickerReceiver, IDatePickeReceiver {
 
     public Button timeChoose;
     public Button dateChoose;
@@ -43,7 +46,6 @@ public class GlucoseEdit extends AppCompatActivity implements View.OnClickListen
     RatingBar mBar;
     Spinner tag;
     EditText editGlucose;
-    public final static DateTimeFormatter DateFormat = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm");
     DbContext context;
     Validator validator;
 
@@ -60,7 +62,7 @@ public class GlucoseEdit extends AppCompatActivity implements View.OnClickListen
 
         type = context.getMeasurementTypeById(User.GetCurrent(this).MeasurementTypeId);
 
-        tag = (Spinner)findViewById(R.id.editTage);
+        tag = (Spinner) findViewById(R.id.editTage);
         ArrayAdapter<Tag> tagAdapter
                 = new ArrayAdapter<Tag>(this, android.R.layout.simple_spinner_dropdown_item, context.getTagAll());
         tag.setAdapter(tagAdapter);
@@ -80,22 +82,21 @@ public class GlucoseEdit extends AppCompatActivity implements View.OnClickListen
         deleteBtn.setOnClickListener(this);
 
 
-        if(this.getIntent().hasExtra("MeasurementInput"))
-        {
-            modelOld = (MeasurementInput)this.getIntent().getSerializableExtra("MeasurementInput");
-            tag.setSelection(modelOld.Tag.Id - 1 );
+        if (this.getIntent().hasExtra("MeasurementInput")) {
+            modelOld = (MeasurementInput) this.getIntent().getSerializableExtra("MeasurementInput");
+            tag.setSelection(modelOld.Tag.Id - 1);
             editTime.setText(DateTimeFormat.forPattern("HH:mm").print(modelOld.InputOn));
             editDate.setText(DateTimeFormat.forPattern("yyyy-MM-dd").print(modelOld.InputOn));
             this.setValue(editGlucose, modelOld.Value);
         }
 
-        GlUnits.setText("("+type.Name+")");
+        GlUnits.setText("(" + type.Name + ")");
     }
-    public void setValue(EditText t, double value)
-    {
-        if(type.Id == 1)
-            t.setText(String.valueOf((int)value));
-        else if(type.Id == 2)
+
+    public void setValue(EditText t, double value) {
+        if (type.Id == 1)
+            t.setText(String.valueOf((int) value));
+        else if (type.Id == 2)
             t.setText(String.valueOf(value));
     }
 
@@ -103,12 +104,12 @@ public class GlucoseEdit extends AppCompatActivity implements View.OnClickListen
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.dateChooseBtne) {
-            DialogFragment newFragment = new DatePickerFragment(editDate);
+            DialogFragment newFragment = new DatePickerFragment(this);
             newFragment.show(this.getFragmentManager(), "datePicker");
 
         }
         if (view.getId() == R.id.timeChooseBtne) {
-            DialogFragment newFragment = new TimePickerFragment(editTime);
+            DialogFragment newFragment = new TimePickerFragment(this);
             newFragment.show(this.getFragmentManager(), "timePicker");
 
         }
@@ -121,21 +122,30 @@ public class GlucoseEdit extends AppCompatActivity implements View.OnClickListen
         if (view.getId() == R.id.updateGlucoseInput) {
             modelNew = new MeasurementInput(modelOld);
 
-            modelNew.InputOn = DateFormat.parseDateTime(editDate.getText().toString() + " "+ editTime.getText().toString());
+            modelNew.InputOn = DbContext.DateTFormat.parseDateTime(editDate.getText().toString() + " " + editTime.getText().toString());
             modelNew.Value = Double.valueOf(editGlucose.getText().toString());
-            modelNew.Tag = (Tag)tag.getSelectedItem();
+            modelNew.Tag = (Tag) tag.getSelectedItem();
 
-            if(validator.ValidateMeasurementInput(modelNew, type))
-            {
+            if (validator.ValidateMeasurementInput(modelNew, type)) {
                 context.updateMeasurementInput(modelNew);
-                Utils.RefreshPrediction(modelNew.InputOn.toLocalDate(),context, type);
+                Utils.RefreshPrediction(modelNew.InputOn.toLocalDate(), context, type);
 
-                if(!modelNew.InputOn.toLocalDate().equals(modelOld.InputOn.toLocalDate()))
-                    Utils.RefreshPrediction(modelOld.InputOn.toLocalDate(),context, type);
+                if (!modelNew.InputOn.toLocalDate().equals(modelOld.InputOn.toLocalDate()))
+                    Utils.RefreshPrediction(modelOld.InputOn.toLocalDate(), context, type);
 
                 finish();
             }
 
+        }
     }
-}
+
+    @Override
+    public void OnDatePicked(LocalDate date) {
+        editDate.setText(DbContext.DateFormat.print(date));
+    }
+
+    @Override
+    public void OnTimePicked(LocalTime time) {
+        editTime.setText(DbContext.TimeFormat.print(time));
+    }
 }

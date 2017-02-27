@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import com.diasafenight.diasafenight.Helpers.DatePickerFragment;
 import com.diasafenight.diasafenight.Helpers.TimePickerFragment;
+import com.diasafenight.diasafenight.Interfaces.IDatePickeReceiver;
+import com.diasafenight.diasafenight.Interfaces.ITimePickerReceiver;
 import com.diasafenight.diasafenight.Model.DbContext;
 import com.diasafenight.diasafenight.Model.Injection;
 import com.diasafenight.diasafenight.Model.InjectionType;
@@ -21,6 +23,7 @@ import com.diasafenight.diasafenight.Model.MeasurementInput;
 import com.diasafenight.diasafenight.Model.Tag;
 
 import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
@@ -29,7 +32,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.regex.Pattern;
 
-public class InjectionEdit extends AppCompatActivity implements View.OnClickListener {
+public class InjectionEdit extends AppCompatActivity implements View.OnClickListener, IDatePickeReceiver, ITimePickerReceiver {
     public Button timeChoose;
     public Button dateChoose;
     public TextView updateBtn;
@@ -87,19 +90,18 @@ public class InjectionEdit extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.dateChooseBtni) {
-            DialogFragment newFragment = new DatePickerFragment(editDate);
+        if (view.getId() == R.id.dateChooseBtnie) {
+            DialogFragment newFragment = new DatePickerFragment(this);
             newFragment.show(this.getFragmentManager(), "datePicker");
 
         }
-        if (view.getId() == R.id.timeChooseBtni) {
-            DialogFragment newFragment = new TimePickerFragment(editTime);
+        if (view.getId() == R.id.timeChooseBtnie) {
+            DialogFragment newFragment = new TimePickerFragment(this);
             newFragment.show(this.getFragmentManager(), "timePicker");
 
         }
         if (view.getId() == R.id.deleteInjectionBtn) {
             context.deleteInjection(model);
-            Toast.makeText(this,"Deleted", Toast.LENGTH_LONG).show();
             finish();
         }
 
@@ -113,5 +115,14 @@ public class InjectionEdit extends AppCompatActivity implements View.OnClickList
 
     }
 
+    @Override
+    public void OnDatePicked(LocalDate date) {
+        editDate.setText(DbContext.DateFormat.print(date));
+    }
+
+    @Override
+    public void OnTimePicked(LocalTime time) {
+        editTime.setText(DbContext.TimeFormat.print(time));
+    }
 }
 

@@ -9,6 +9,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 
 import com.diasafenight.diasafenight.GlucoseList;
+import com.diasafenight.diasafenight.Interfaces.IDatePickeReceiver;
 
 import org.joda.time.LocalDate;
 
@@ -23,15 +24,21 @@ public class DatePickerFragment extends DialogFragment
     EditText editDate = null;
     Button editDateBtn = null;
     GlucoseList parent = null;
+    IDatePickeReceiver receiver;
     public DatePickerFragment(){ }
-    public DatePickerFragment(EditText b)
+
+    //    public DatePickerFragment(EditText b)
+//    {
+//        editDate = b;
+//    }
+//    public DatePickerFragment(GlucoseList parent_, Button b)
+//    {
+//        parent = parent_;
+//        editDateBtn = b;
+//    }
+    public DatePickerFragment(IDatePickeReceiver r)
     {
-        editDate = b;
-    }
-    public DatePickerFragment(GlucoseList parent_, Button b)
-    {
-        parent = parent_;
-        editDateBtn = b;
+        receiver = r;
     }
 
     @Override
@@ -41,20 +48,21 @@ public class DatePickerFragment extends DialogFragment
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);
-
         // Create a new instance of DatePickerDialog and return it
         return new DatePickerDialog(getActivity(),DatePickerDialog.THEME_HOLO_DARK, this, year, month, day);
     }
 
     public void onDateSet(DatePicker view, int year, int month, int day) {
-        String text = String.format("%04d-%02d-%02d", year, month + 1, day);
-        if(editDate != null){
-            editDate.setText(text);
-        }
-        if(editDateBtn != null){
-            parent.viewDate = new LocalDate(year, month + 1, day);
-            parent.setList();
-            editDateBtn.setText(text);
-        }
+        // String text = String.format("%04d-%02d-%02d", year, month + 1, day);
+        LocalDate localDate = new LocalDate(year, month + 1, day);
+        receiver.OnDatePicked(localDate);
+//        if(editDate != null){
+//            editDate.setText(text);
+//        }
+//        if(editDateBtn != null){
+//            parent.viewDate = new LocalDate(year, month + 1, day);
+//            parent.setList();
+//            editDateBtn.setText(text);
+//        }
     }
 }
