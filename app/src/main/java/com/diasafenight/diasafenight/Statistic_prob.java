@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.graphics.Color;
 
 import com.diasafenight.diasafenight.Helpers.Comparators.MeasurementInputComparator;
+import com.diasafenight.diasafenight.Helpers.IconBar;
 import com.diasafenight.diasafenight.Model.DbContext;
 import com.diasafenight.diasafenight.Model.MeasurementInput;
 import com.github.mikephil.charting.charts.LineChart;
@@ -52,6 +53,9 @@ public class Statistic_prob extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistic_prob);
+
+        IconBar icons = new IconBar(this);
+        icons.registerIconBar();
 
         DbContext conn = new DbContext(this);
         ArrayList<MeasurementInput> preds = getWeekData();

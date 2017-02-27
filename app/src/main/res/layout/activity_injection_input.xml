@@ -206,14 +206,14 @@
             />
 
         <EditText
-
             android:layout_height="50dp"
             android:textSize="20dp"
             android:id="@+id/editTimei"
             android:layout_width="match_parent"
             android:layout_marginLeft="50dp"
             android:textColor="#000000"
-            android:inputType="time" />
+            android:inputType="time"
+            android:selectAllOnFocus="true" />
     </LinearLayout>
 
     <LinearLayout
@@ -243,14 +243,14 @@
             />
 
         <EditText
-
             android:layout_height="50dp"
             android:textSize="20dp"
             android:id="@+id/editDatei"
             android:layout_width="match_parent"
             android:layout_marginLeft="50dp"
             android:textColor="#000000"
-            android:inputType="date" />
+            android:inputType="date"
+            android:selectAllOnFocus="true"/>
     </LinearLayout>
 
     <LinearLayout
@@ -286,6 +286,7 @@
             android:layout_width="175dp"
             android:layout_marginLeft="20dp"
             android:textColor="#000000"
-            android:inputType="numberDecimal" />
+            android:inputType="numberDecimal"
+            android:selectAllOnFocus="true"/>
     </LinearLayout>
 </RelativeLayout>

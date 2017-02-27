@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -23,6 +24,7 @@ import com.diasafenight.diasafenight.Helpers.IconBar;
 import com.diasafenight.diasafenight.Helpers.MeasurementPeriodAdapter;
 import com.diasafenight.diasafenight.Helpers.Utils;
 import com.diasafenight.diasafenight.Model.DbContext;
+import com.diasafenight.diasafenight.Model.InjectionType;
 import com.diasafenight.diasafenight.Model.MeasurementInput;
 import com.diasafenight.diasafenight.Model.MeasurementPeriod;
 import com.diasafenight.diasafenight.Model.Prediction;
@@ -114,6 +116,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         dialog.setContentView(R.layout.activity_popup_alginf);
         ((TextView)dialog.findViewById(R.id.textViewMessage)).setText(message);
         dialog.show();
+
+        dialog.findViewById(R.id.alginfCloseBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
     }
 
     private void startCountAnimation(int valueTo, final TextView textView) {

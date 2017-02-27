@@ -121,5 +121,7 @@
                 "and " +
                 "cordis.europa.eu/project/rcn/194356_en.html."
     </string>
+    <string name="hh_mm">HH:mm</string>
+    <string name="yyyy_mm_dd">yyyy-MM-dd</string>
 
 </resources>
