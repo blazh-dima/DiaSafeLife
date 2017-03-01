@@ -60,7 +60,8 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
                     .setTicker(ticker)
                     .setAutoCancel(true)
                     .setContentTitle(title)
-                    .setContentText(text).build();
+                    .setContentText(text)
+                    .build();
             notificationManager = (NotificationManager)context.getSystemService(NOTIFICATION_SERVICE);
             notificationManager.notify(mpId, notification);
 

@@ -75,14 +75,20 @@ public class PrimaryData0 extends AppCompatActivity implements View.OnClickListe
         for (MeasurementPeriod p : periods)
         {
             DateTime time = DateTime.now().withTime(p.ReminderTime);
+            if (time.isBeforeNow())
+                time = time.plusDays(1);
+
             Intent alarmIntent = new Intent(this, AlarmReceiver.class); // AlarmReceiver = broadcast receiver
             alarmIntent.putExtra("MeasurementPeriod", p.Id);
             PendingIntent pendingIntent = PendingIntent.getBroadcast(  this, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-            alarmManager.cancel(pendingIntent);
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
+            if (Build.VERSION.SDK_INT >= 23)
+                alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, time.getMillis(), pendingIntent);
+
+            else if (Build.VERSION.SDK_INT >= 19)
                 alarmManager.setExact(AlarmManager.RTC_WAKEUP, time.getMillis(), pendingIntent);
-            else
+
+            else if (Build.VERSION.SDK_INT >= 16)
                 alarmManager.set(AlarmManager.RTC_WAKEUP, time.getMillis(), pendingIntent);
 
         }
