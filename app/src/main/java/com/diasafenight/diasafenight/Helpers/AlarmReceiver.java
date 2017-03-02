@@ -74,9 +74,13 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
             alarmManager.cancel(pendingIntent);
 
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
+            if (Build.VERSION.SDK_INT >= 23)
+                alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, time.getMillis(), pendingIntent);
+
+            else if (Build.VERSION.SDK_INT >= 19)
                 alarmManager.setExact(AlarmManager.RTC_WAKEUP, time.getMillis(), pendingIntent);
-            else
+
+            else if (Build.VERSION.SDK_INT >= 16)
                 alarmManager.set(AlarmManager.RTC_WAKEUP, time.getMillis(), pendingIntent);
 
         }
